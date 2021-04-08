@@ -1,0 +1,36 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "expo": "~40.0.0",
+    "expo-status-bar": "~1.0.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-web": "~0.13.12"
+  },
+  "devDependencies": {
+    "@babel/core": "~7.9.0"
+  },
+  "private": true,
+
+  "checkSubmission": {
+    "ex": "1",
+    "students": [
+      { "id": "302853619", "fullName": "Shani Levi", "email": "shanilevi01011@gmail.com" }
+    ],
+    "os": "Windows",
+    "device": "Android",
+    "submissionDate": "21/03/2021",
+    "delay": false,
+    "delayReason": "",
+    "comments": "Main components called in App.js are named: {Home.js,Status.js} . All components in the commponents folder. Using Hooks ."
+  }
+}

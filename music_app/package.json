@@ -1,0 +1,50 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
+    "expo": "~41.0.1",
+    "expo-status-bar": "~1.0.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-elements": "^3.4.1",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.1.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "^3.0.0",
+    "react-native-spinkit": "^1.5.1",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-web": "~0.13.12",
+    "react-navigation-stack": "^2.10.4",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
+    "expo-av": "~9.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0"
+  },
+  "private": true,
+
+  "checkSubmission": {
+    "ex": "2",
+    "students": [
+      { "id": "302853619", "fullName": "Shani Levi", "email": "shanilevi01011@gmail.com" }
+    ],
+    "os": "Windows",
+    "device": "Android",
+    "submissionDate": "06/05/2021",
+    "delay": false,
+    "delayReason": "",
+    "comments": "all Audio functions is in the Home Commponnt for support stopSong when press on button - I did not find in the documentation how to support the component of navigtion (ButtonAPP) and also passing Props to the commponnent ( props is not reconized while passing ButtonApp({navigation},props) to commponnent) ----> so clicking the button to next page does not stop the song."
+  }
+}

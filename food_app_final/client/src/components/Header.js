@@ -7,32 +7,36 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HeaderApp = (props) => {
     const navigation = useNavigation();
+    const {backTo} = props
+
+    const goBack = () =>
+    navigation.navigate(`${backTo}`, { user: props });
 
     return (
         //     <Header  onPress={() => navigation.navigate('Menu')}
-        //     leftComponent={{ icon: 'menu', color: '#000'}}
+        //     leftComponent={{ icon: 'arrow-back', color: '#000'}}
         //     centerComponent={{ text: 'FooDelicious', style: { color: '#fff' } }}
         //     rightComponent={{ icon: 'home', color: '#fff' }}
+        //     style={{backgroundColor:'green'}}
         //   />
-        <View >
-            <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
-                <Icon name="menu" size={30} color="#000" style={{ marginLeft: 15 }} />
-            </TouchableOpacity>        
-            </View>
+        <View style={styles.header}>
+            <TouchableOpacity onPress={goBack}>
+                <Icon name="keyboard-backspace" size={40} style={styles.icon} />
+            </TouchableOpacity>
+        </View>
 
     );
 }
-
 export default HeaderApp;
 
 
 const styles = StyleSheet.create({
     header: {
-        width: '100%',
-        backgroundColor: '#eee',
-        height: 60,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
+        position: 'absolute',
+    },
+    icon: {
+        marginLeft: 10,
+        marginTop: 10,
+        color: "#000"
     }
 });

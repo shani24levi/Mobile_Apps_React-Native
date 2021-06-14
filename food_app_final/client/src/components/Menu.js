@@ -17,6 +17,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Home from "./screens/Home";
+import Profile from "./profile/Profile";
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,6 +39,25 @@ const NavigationDrawerStructure = (props) => {
   );
 };
 
+
+const NavigationMassages = (props) => {
+  //Structure for the navigatin Drawer
+  const toggleDrawer = () => {
+    //Props to open/close the drawer
+    props.navigationProps.toggleDrawer();
+  };
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity onPress={() => toggleDrawer()}>
+        <Icon name="bell-outline" size={30} color="#FA4A0C" style={{ marginRight: 15 }} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => toggleDrawer()}>
+        <Icon name="food-fork-drink" size={30} color="#000" style={{ marginRight: 15 }} />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
 function firstScreenStack({ navigation }) {
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -46,6 +67,9 @@ function firstScreenStack({ navigation }) {
         options={{
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerRight: () => (
+            <NavigationMassages navigationProps={navigation} />
           ),
           headerStyle: {backgroundColor: "#fff"},
           headerTintColor: "#000", 
@@ -70,15 +94,15 @@ const Menu = ({ navigation, route }) => {
         <Drawer.Screen
           name="user"
           options={{
-            drawerLabel: `shani`,
-            // drawerIcon: (config) => (
-            //   <Image
-            //     source={{
-            //       uri: `${user.avatar}`,
-            //     }}
-            //     style={{ width: 30, height: 30 }}
-            //   />
-            // ),
+            drawerLabel: user.user != undefined ? user.user : 'Welcom Back',
+            drawerIcon: (config) => (
+              <Image
+                source={{
+                  uri: user.avatar != undefined ? `${user.avatar}` : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_yQNApJkRMrztokLbDY6k1gDdsdv8XlSDGA&usqp=CAU',
+                }}
+                style={{ width: 100, height: 100 , borderRadius: 50}}
+              />
+            ),
           }}
           component={firstScreenStack}
         />
@@ -92,22 +116,17 @@ const Menu = ({ navigation, route }) => {
           }}
           component={firstScreenStack}
         />
-        {/* <Drawer.Screen
-          name="Settings"
+        <Drawer.Screen
+          name="Profile"
           options={{
-            drawerLabel: "Settings",
+            drawerLabel: "Profile",
             drawerIcon: (config) => (
-              <Icon
-                size={23}
-                name={
-                  Platform.OS === "android" ? "md-settings" : "ios-Settings"
-                }
-              ></Icon>
+              <Icon name="face-profile" size={30} style={{ marginLeft: 5 }} />
             ),
           }}
-          component={firstScreenStack}
+          component={Profile}
         />
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="Sign out"
           options={{
             drawerLabel: "Sign out",

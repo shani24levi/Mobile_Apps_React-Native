@@ -77,7 +77,7 @@ const Login = (props) => {
         else {
             props.loginUser(userData);
             //when user login secssfly
-            if (props.auth) {
+            if (props.auth.user) {
                // console.log(props.auth);
                navigation.navigate("Menu", { user: props.auth });
 

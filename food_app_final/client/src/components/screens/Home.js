@@ -10,18 +10,23 @@ import HeaderApp from '../Header';
 
 
 const Home = (props) => {
-    const onPressSearch = () => {
-        console.log('ok');
-    }
+    const [my_search, setSearch] = React.useState('');
+
+    const onPressSearch = (search) => {
+        setSearch(search.toLowerCase());
+    };
 
     return (
-        <SafeAreaView style={styles.body}>
-            <Text numberOfLines={1} style={styles.title}> Delicious Food For You</Text>
-            <SearchBarApp onPressSearch={onPressSearch} />
-            <TabsViewHome />
-            {/* <Foods /> */}
+        <>
+            <SafeAreaView style={styles.body}>
+                <Text numberOfLines={1} style={styles.title}> Delicious Food For You</Text>
+                <SearchBarApp onPressSearch={onPressSearch} />
+                <TabsViewHome search={my_search} />
+                {/* <Foods /> */}
 
-        </SafeAreaView >
+            </SafeAreaView >
+            {/* <Footer /> */}
+        </>
     );
 }
 

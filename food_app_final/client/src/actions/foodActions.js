@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 import {api} from '../utils/globalConstants';
-import {GET_ACTIVE_FOODS,FOOD_LOADING} from '../types';
+import {GET_ACTIVE_FOODS,FOOD_LOADING, GET_FOODS_BY_TYPE} from '../types';
 
 export const getAvilibalsFoods = () => dispatch => {
   dispatch(setFoodLoading());
@@ -28,16 +28,18 @@ export const getAvilibalsType = (type) => dispatch => {
     axios
       .get(`${api}/foods/all/search?q=${type}`)
       .then(res =>
-        //  console.log('12', res)
+        //console.log('12', res)
         dispatch({
-          type: GET_ACTIVE_FOODS,
-          payload: res.data
+          type: GET_FOODS_BY_TYPE,
+          payload: res.data, 
+          mytype : type
         })
       )
       .catch(err =>
         dispatch({
-          type: GET_ACTIVE_FOODS,
-          payload: {}
+          type: GET_FOODS_BY_TYPE,
+          payload: {},
+          mytype : type
         })
       );
   };

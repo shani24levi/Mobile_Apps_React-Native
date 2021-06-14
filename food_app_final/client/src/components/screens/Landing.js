@@ -31,7 +31,7 @@ const Landing = ({ navigation = useNavigation() }) => {
                     setIsLogin(true);
                 })
                 .catch((error) => {
-                    console.log(error.response);
+                    console.log('user ont login or token expiered');
                 })
         }
     }
@@ -53,7 +53,7 @@ const Landing = ({ navigation = useNavigation() }) => {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => { islogin ? navigation.navigate("Menu", { data22: 'data.data.token' }) : navigation.navigate('Welcom') }}
+                    onPress={() => { islogin ? navigation.navigate("Menu", { data: 'data.data.token' }) : navigation.navigate('Welcom') }}
                 >
 
                     <Text style={styles.btnText} >Get Started</Text>

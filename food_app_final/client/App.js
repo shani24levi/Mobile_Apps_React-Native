@@ -14,6 +14,8 @@ import Landing from './src/components/screens/Landing';
 import AuthPage from './src/components/screens/AuthPage';
 import Home from './src/components/screens/Home';
 import Menu from './src/components/Menu';
+import FoodDetails from './src/components/foods/FoodDetails';
+import Profile from './src/components/profile/Profile';
 
 import Footer from './src/components/Footer';
 
@@ -64,6 +66,8 @@ export default function App() {
           <Stack.Screen name="Welcom" component={AuthPage} />
           <Stack.Screen name="Menu" component={Menu} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="FoodDetails" component={FoodDetails} />
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator> 
       </NavigationContainer>
     </Provider>

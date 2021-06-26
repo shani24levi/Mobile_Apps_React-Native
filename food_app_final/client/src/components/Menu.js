@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,17 +11,23 @@ import {
   Alert,
   Platform,
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Home from "./screens/Home";
-import Profile from "./profile/Profile";
+import Profile from "./screens/Profile";
+import AuthPage from './screens/AuthPage';
+import Messages from './screens/Messages';
+import AddItem from './screens/AddItem';
 
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
 
 const NavigationDrawerStructure = (props) => {
   //Structure for the navigatin Drawer
@@ -40,24 +46,6 @@ const NavigationDrawerStructure = (props) => {
 };
 
 
-const NavigationMassages = (props) => {
-  //Structure for the navigatin Drawer
-  const toggleDrawer = () => {
-    //Props to open/close the drawer
-    props.navigationProps.toggleDrawer();
-  };
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity onPress={() => toggleDrawer()}>
-        <Icon name="bell-outline" size={30} color="#FA4A0C" style={{ marginRight: 15 }} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => toggleDrawer()}>
-        <Icon name="food-fork-drink" size={30} color="#000" style={{ marginRight: 15 }} />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
 function firstScreenStack({ navigation }) {
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -68,21 +56,37 @@ function firstScreenStack({ navigation }) {
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
-          headerRight: () => (
-            <NavigationMassages navigationProps={navigation} />
-          ),
-          headerStyle: {backgroundColor: "#fff"},
-          headerTintColor: "#000", 
-          headerTitleStyle: {fontWeight: "bold" },
+          headerStyle: { backgroundColor: "#fff" },
+          headerTintColor: "#000",
+          headerTitleStyle: { fontWeight: "bold" },
         }}
       />
     </Stack.Navigator>
   );
 }
 
+const removeValue = async () => {
+  try {
+    await AsyncStorage.removeItem('token')
+    console.log('bey');
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function logOut({ navigation }) {
+  removeValue();
+  return (
+    <Stack.Navigator headerMode='none'>
+      <Stack.Screen name="AuthPage" component={AuthPage} />
+    </Stack.Navigator>
+  );
+}
+
 const Menu = ({ navigation, route }) => {
   const user = route.params;
-  console.log(user);
+  // console.log('user.data.avatar' , user.data.avatar);
   return (
     <>
       <Drawer.Navigator
@@ -94,13 +98,13 @@ const Menu = ({ navigation, route }) => {
         <Drawer.Screen
           name="user"
           options={{
-            drawerLabel: user.user != undefined ? user.user : 'Welcom Back',
+            drawerLabel: user.data.user != undefined ? user.data.user : 'Welcom',
             drawerIcon: (config) => (
               <Image
                 source={{
-                  uri: user.avatar != undefined ? `${user.avatar}` : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_yQNApJkRMrztokLbDY6k1gDdsdv8XlSDGA&usqp=CAU',
+                  uri: user.data.avatar != undefined ? `https:${user.data.avatar}` : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_yQNApJkRMrztokLbDY6k1gDdsdv8XlSDGA&usqp=CAU',
                 }}
-                style={{ width: 100, height: 100 , borderRadius: 50}}
+                style={{ width: 100, height: 100, borderRadius: 50 }}
               />
             ),
           }}
@@ -111,7 +115,7 @@ const Menu = ({ navigation, route }) => {
           options={{
             drawerLabel: "Home",
             drawerIcon: (config) => (
-                <Icon name="home" size={30} style={{ marginLeft: 5 }} />
+              <Icon name="home" size={30} style={{ marginLeft: 5 }} />
             ),
           }}
           component={firstScreenStack}
@@ -126,21 +130,48 @@ const Menu = ({ navigation, route }) => {
           }}
           component={Profile}
         />
-        {/* <Drawer.Screen
-          name="Sign out"
+        <Drawer.Screen
+          name="My Foods Requests"
           options={{
-            drawerLabel: "Sign out",
+            drawerLabel: "My Foods Requests",
             drawerIcon: (config) => (
-              <Icon
-                size={23}
-                name={
-                  Platform.OS === "android" ? "md-settings" : "ios-Settings"
-                }
-              ></Icon>
+              <Icon name="bell-outline" size={30} style={{ marginLeft: 5 }} />
+            ),
+          }}
+          component={Messages}
+        />
+        <Drawer.Screen
+          name="Add Donation"
+          options={{
+            drawerLabel: "Add Donation",
+            drawerIcon: (config) => (
+              <Icon name="plus-circle-outline" size={30} style={{ marginLeft: 5 }} />
+            ),
+          }}
+          component={AddItem}
+        />
+
+        <Drawer.Screen
+          name="Setting"
+          options={{
+            drawerLabel: "Setting",
+            drawerIcon: (config) => (
+              <Icon name="account-settings-outline" size={30} style={{ marginLeft: 5 }} />
             ),
           }}
           component={firstScreenStack}
-        /> */}
+        />
+        <Drawer.Screen
+          name="Welcom"
+          options={{
+            drawerLabel: "Log Out",
+            drawerIcon: (config) => (
+              <Icon name="logout" size={30} style={{ marginLeft: 5 }} />
+            ),
+          }}
+          component={logOut}
+        />
+
       </Drawer.Navigator>
 
     </>

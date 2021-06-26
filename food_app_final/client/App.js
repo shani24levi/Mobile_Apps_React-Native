@@ -14,8 +14,13 @@ import Landing from './src/components/screens/Landing';
 import AuthPage from './src/components/screens/AuthPage';
 import Home from './src/components/screens/Home';
 import Menu from './src/components/Menu';
-import FoodDetails from './src/components/foods/FoodDetails';
-import Profile from './src/components/profile/Profile';
+import FoodDetails from './src/components/screens/FoodDetails';
+import Profile from './src/components/screens/Profile';
+import Messages from './src/components/screens/Messages';
+import AddItem from './src/components/screens/AddItem';
+
+
+
 
 import Footer from './src/components/Footer';
 
@@ -68,6 +73,10 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="FoodDetails" component={FoodDetails} />
           <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Messages" component={Messages} />
+          <Stack.Screen name="AddItem" component={AddItem} />
+
+          
         </Stack.Navigator> 
       </NavigationContainer>
     </Provider>

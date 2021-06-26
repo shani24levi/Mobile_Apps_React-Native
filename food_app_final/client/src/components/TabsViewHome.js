@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { View, Dimensions, StatusBar, useWindowDimensions, StyleSheet,Text } from 'react-native';
+import { View, Dimensions, StatusBar, useWindowDimensions, StyleSheet, Text } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 
 import FoodsList from './foods/FoodsList';
-import { getAvilibalsFoods , getAvilibalsType} from '../actions/foodActions';
+import { getAvilibalsFoods, getAvilibalsType } from '../actions/foodActions';
 
 
 function mapStateToProps(state) {
-      return {
-        foods: state.foods,
-        snacks: state.snacks,
-        drinks: state.drinks,
-        dairies: state.dairies,
-        meats: state.meat,
-    };
+  return {
+    foods: state.foods,
+    snacks: state.snacks,
+    drinks: state.drinks,
+    dairies: state.dairies,
+    meats: state.meat,
+  };
 }
 
 const TabsViewHome = (props) => {
-  const {search} = props;
+  const { search } = props;
 
   React.useEffect(() => {
     props.getAvilibalsFoods();
@@ -30,10 +30,10 @@ const TabsViewHome = (props) => {
     props.getAvilibalsType('meat');
 
     return;
-}, [])
+  }, [])
 
-
-const searchList = props.foods.foods.filter(todo => todo.title.toString().toLowerCase().includes(search));
+  // searchList =props.foods.foods;
+  const searchList = props.foods.foods.filter(todo => todo.title.toString().toLowerCase().includes(search));
   const FirstRoute = () => (
     <>
       {
@@ -42,7 +42,7 @@ const searchList = props.foods.foods.filter(todo => todo.title.toString().toLowe
           <Loading />
           :
           <View style={{ flex: 1 }} >
-            <FoodsList tab_list={searchList}/>
+            <FoodsList tab_list={searchList} />
           </View>
       }
     </>
@@ -50,67 +50,67 @@ const searchList = props.foods.foods.filter(todo => todo.title.toString().toLowe
 
   const SecondRoute = () => (
     <>
-    {
-      props.foods.loading
-        ?
-        <Loading />
-        :
-        <View style={{ flex: 1 }} >
-          <FoodsList tab_list={props.foods.snacks} />
-        </View>
-    }
-  </>
+      {
+        props.foods.loading
+          ?
+          <Loading />
+          :
+          <View style={{ flex: 1 }} >
+            <FoodsList tab_list={props.foods.snacks} />
+          </View>
+      }
+    </>
   );
 
   const ThirdRoute = () => (
     <>
-    {
-     props.foods.loading
-        ?
-        <Loading />
-        :
-        <View style={{ flex: 1 }} >
-          <FoodsList tab_list={props.foods.drinks} />
-        </View>
-    }
-  </>
+      {
+        props.foods.loading
+          ?
+          <Loading />
+          :
+          <View style={{ flex: 1 }} >
+            <FoodsList tab_list={props.foods.drinks} />
+          </View>
+      }
+    </>
   );
 
   const FourthRoute = () => (
     <>
-    {
-     props.foods.loading
-        ?
-        <Loading />
-        :
-        <View style={{ flex: 1 }} >
-          <FoodsList tab_list={props.foods.dairies} />
-        </View>
-    }
-  </>
+      {
+        props.foods.loading
+          ?
+          <Loading />
+          :
+          <View style={{ flex: 1 }} >
+            <FoodsList tab_list={props.foods.dairies} />
+          </View>
+      }
+    </>
   );
 
   const FifthRoute = () => (
     <>
-    {
-      props.foods.loading
-        ?
-        <Loading />
-        :
-        <View style={{ flex: 1 }} >
-          <FoodsList tab_list={props.foods.meats} />
-        </View>
-    }
-  </>
+      {
+        props.foods.loading
+          ?
+          <Loading />
+          :
+          <View style={{ flex: 1 }} >
+            <FoodsList tab_list={props.foods.meats} />
+          </View>
+      }
+    </>
   );
-  
+
 
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'Food'},
-    { key: 'second', title: 'Snack'},
+    { key: 'first', title: 'Food' },
+    { key: 'second', title: 'Snack' },
     { key: 'third', title: 'Drink' },
     { key: 'fourth', title: 'Dairy' },
     { key: 'fifth', title: 'Meat' },
@@ -148,12 +148,12 @@ const searchList = props.foods.foods.filter(todo => todo.title.toString().toLowe
 }
 
 TabsViewHome.propTypes = {
-    foods: PropTypes.object
+  foods: PropTypes.object
 };
 
 // export default TabsViewHome;
 
-export default connect(mapStateToProps, {getAvilibalsFoods, getAvilibalsType})(TabsViewHome);
+export default connect(mapStateToProps, { getAvilibalsFoods, getAvilibalsType })(TabsViewHome);
 
 const styles = StyleSheet.create({
   text: {

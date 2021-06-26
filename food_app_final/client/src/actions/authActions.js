@@ -4,11 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import {api} from '../utils/globalConstants';
-import {TEST ,GET_ERRORS ,SET_CURRENT_USER} from '../types';
+import { api } from '../utils/globalConstants';
+import { TEST, GET_ERRORS, SET_CURRENT_USER, AUTH_TOKEN } from '../types';
 
-// import { useNavigation } from '@react-navigation/native';
-//  const navigation = useNavigation();
 
 const storeData = async (value) => {
   try {
@@ -29,20 +27,12 @@ const getData = async () => {
   }
 }
 
-// removeValue = async () => {
-//   try {
-//     await AsyncStorage.removeItem('token')
-//   } catch (e) {
-//     // remove error
-//   }
-// }
-
 
 // Register User
 export const registerUser = (userData) => dispatch => {
   axios
     .post(`${api}/users`, userData)
-    .then(res => console.log(res)) //redirect ?
+    .then(res => console.log(res))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -61,22 +51,52 @@ export const loginUser = userData => dispatch => {
       setAuthToken(res.data.token);
       // Set current user
       const decoded = jwt_decode(res.data.token);
-      dispatch(setCurrentUser(decoded));
+      dispatch(setCurrentUser(decoded, res.data.token));
     })
-    .catch(err =>
+    .catch(err => {//console.log('err')
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
+    }
     );
 };
 
 // Set logged in user
-export const setCurrentUser = userData => {
+export const setCurrentUser = (userData, token) => {
   return {
     type: SET_CURRENT_USER,
-    payload: userData
+    payload: userData,
+    token: token
   };
+};
+
+
+export const authToken = (value) => dispatch => {
+  // v = getData()
+  axios({
+    method: 'GET',
+    url: `${api}/users/auth`,
+    headers: {
+      "x-auth-token": value,
+    }
+  })
+    .then(res =>
+      // console.log(res.data)
+      dispatch(setCurrentUser(jwt_decode(value), value))
+      // dispatch({
+      //   type: AUTH_TOKEN,
+      //   payload: res.data,
+      // })
+    )
+    .catch(err =>
+      //  console.log(res.err)
+
+      dispatch({
+        type: AUTH_TOKEN,
+        payload: err.response.data,
+      })
+    );
 };
 
 // // Log user out
@@ -89,13 +109,3 @@ export const setCurrentUser = userData => {
 //   dispatch(setCurrentUser({}));
 // };
 
-
-
-
-
-export const testA = () => dispatch => {
-  dispatch({
-    type: TEST,
-    payload: "search_query"
-  });
-};

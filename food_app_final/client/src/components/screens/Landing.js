@@ -1,40 +1,53 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, Image, SafeAreaView } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
+import { connect } from 'react-redux';
+import { authToken } from '../../actions/authActions';
 
-const Landing = ({ navigation = useNavigation() }) => {
+function mapStateToProps(state) {
+    return {
+        auth: state.auth,
+        errors: state.errors,
+    };
+}
+
+const Landing = (props) => {
     const [islogin, setIsLogin] = useState(false);
+    const navigation = useNavigation();
+
+    React.useEffect(() => {
+        if (props.errors.message == "access denied")
+            console.log("access denied");
+        if (props.auth.user)
+            //console.log(props.auth.user);
+            setIsLogin(true);
+    }, [props.errors, props.auth])
 
     React.useEffect(() => {
         isLogin();
     }, [])
 
+
     const isLogin = async () => {
         const value = await AsyncStorage.getItem('token');
-        if (value !== null) {
-            //check if token is still valid using api
-            axios({
-                method: 'GET',
-                url: 'https://foodelicious-app.herokuapp.com/users/auth',
-                headers: {
-                    "x-auth-token": value,
-                }
-            })
-                .then((data) => {
-                    // console.log('31',data);
-                    setIsLogin(true);
-                })
-                .catch((error) => {
-                    console.log('user ont login or token expiered');
-                })
+        // console.log('value', value);
+        if (value == null) {
+            setIsLogin(false);
+        }
+        else {
+            props.authToken(value);
+            console.log('42', props.errors);
+            console.log('43', props.auth);
         }
     }
+
 
     return (
         <SafeAreaView style={styles.body}>
@@ -53,7 +66,7 @@ const Landing = ({ navigation = useNavigation() }) => {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => { islogin ? navigation.navigate("Menu", { data: 'data.data.token' }) : navigation.navigate('Welcom') }}
+                    onPress={() => { islogin ? navigation.navigate("Menu", { data: props.auth.user }) : navigation.navigate('Welcom') }}
                 >
 
                     <Text style={styles.btnText} >Get Started</Text>
@@ -62,7 +75,12 @@ const Landing = ({ navigation = useNavigation() }) => {
         </SafeAreaView >
     );
 }
-export default Landing;
+
+Landing.propTypes = {
+    auth: PropTypes.object,
+    errors: PropTypes.object
+};
+export default connect(mapStateToProps, { authToken })(Landing);
 
 
 

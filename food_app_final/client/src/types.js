@@ -3,11 +3,26 @@ export const SEARCH_QUERY = 'SEARCH_QUERY';
 
 export const TEST = 'TEST';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const AUTH_TOKEN = 'AUTH_TOKEN';
 
 export const GET_ACTIVE_FOODS = 'GET_ACTIVE_FOODS';
 export const FOOD_LOADING = 'FOOD_LOADING';
 export const GET_FOODS_BY_TYPE = 'GET_FOODS_BY_TYPE';
+export const GET_USER_FOODS = 'GET_USER_FOODS';
+export const SET_NEW_FOOD = 'SET_NEW_FOOD';
+export const DELETE_FOOD = 'DELETE_FOOD';
 
+
+
+export const GET_PROFILE = 'GET_PROFILE';
+export const PRPFILE_LOADING = 'PRPFILE_LOADING';
+export const SET_PROFILE = 'SET_PROFILE';
+
+export const GET_REQUESRS_FOR_FOOD = 'GET_REQUESRS_FOR_FOOD';
+export const REQUESRS_LOADING = 'REQUESRS_LOADING';
+export const GET_REQUESRS_FOR_USER = 'GET_REQUESRS_FOR_USER';
+export const DELETE_REQUESR = 'DELETE_REQUESR';
+export const SET_NEW_REQUST = 'SET_NEW_REQUST';
 
 
 

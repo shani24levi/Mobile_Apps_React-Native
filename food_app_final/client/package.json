@@ -16,6 +16,7 @@
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.1",
     "expo": "~41.0.1",
+    "expo-image-picker": "^10.1.4",
     "expo-linear-gradient": "~9.1.0",
     "expo-status-bar": "~1.0.4",
     "joi-browser": "^13.4.0",
@@ -25,8 +26,10 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-elements": "^3.4.1",
+    "react-native-form-select-picker": "0.0.12",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-google-signin": "^2.1.1",
+    "react-native-input-scroll-view": "^1.11.0",
     "react-native-pager-view": "5.0.12",
     "react-native-paper": "^4.8.1",
     "react-native-reanimated": "~2.1.0",
@@ -44,5 +47,27 @@
   "devDependencies": {
     "@babel/core": "^7.9.0"
   },
-  "private": true
+  "private": true,
+
+  "checkSubmission": {
+    "ex": "Final project",
+    "students": [
+      { "id": "302853619", "fullName": "Shani Levi", "email": "shanilevi01011@gmail.com" },
+      { "id": "301907515", "fullName": "Itamar Shoshan", "email": "itamarShoshan@gmail.com" }
+    ],
+    "os": "Windows",
+    "device": "Android",
+    "submissionDate": "26/06/2021",
+    "delay": false,
+    "delayReason": "",
+    "comments": [
+      {"id": "1", "Description": "Some of the functions have not been implemented - functions for editing on the page of the profile and requests - does not return a comment to the user - printed on the console"},
+      {"id": "2", "Description": "Preserving the token in Loocal-Storge and reading it within the redax start of auth.token"},
+      {"id": "3", "Description": "The part of identifying the user's location and food offers by distance as planned due to time constraints was not implemented"},
+      {"id": "4", "Description": "logOut click is ok but when trying to login agin -dosent work (doesnt returning any errors)- need to reFresh the page in order to login agin"}
+    ]
+  },
+  "link-demo": "https://www.youtube.com/watch?v=OAEOeDDYeZ8"
+
+ 
 }

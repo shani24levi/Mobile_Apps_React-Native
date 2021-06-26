@@ -4,10 +4,8 @@ import { ScrollView, Text, View, TouchableOpacity, TouchableHighlight } from 're
 import { TextInput } from 'react-native-paper';
 import Joi from 'joi-browser';
 
-// import {GoogleSignin, GoogleSigninButton,statusCodes} from 'react-native-google-signin'
 import { connect } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-
 import styles from './styles/styles'
 import { loginUser } from '../../actions/authActions';
 
@@ -27,6 +25,9 @@ const Login = (props) => {
     const navigation = useNavigation();
 
     React.useEffect(() => {
+        if (props.auth.user._id) {
+            navigation.navigate("Menu", { data: props.auth.user })
+        }
         let errors = {};
         // console.log('props.errors ', props.errors);
         if (props.errors.message === 'user not found') {
@@ -37,7 +38,7 @@ const Login = (props) => {
         }
         setErorrs(errors);
         return;
-    }, [props.errors])
+    }, [props.errors, props.auth.user])
 
 
     const joiSchema = {
@@ -50,7 +51,7 @@ const Login = (props) => {
             email: email,
             pass: pass,
         };
-       // console.log('userData', userData);
+        // console.log('userData', userData);
         let errors = {};
 
         //check valid form inputs
@@ -76,13 +77,6 @@ const Login = (props) => {
         }
         else {
             props.loginUser(userData);
-            //when user login secssfly
-            if (props.auth.user) {
-               // console.log(props.auth);
-               navigation.navigate("Menu", { user: props.auth });
-
-               // navigation.navigate('Home')
-            }
         }
     }
 
@@ -114,27 +108,13 @@ const Login = (props) => {
                 <Text style={styles.btnText} >Login</Text>
             </TouchableOpacity>
 
-            {/* <GoogleSigninButton
-                style={{width:192, height:50}}
-                // size={GoogleSigninButton.Size.Wide}
-                // color={GoogleSigninButton.Color.Dark}
-                onPress= {console.log('d')}>
-                </GoogleSigninButton> */}
-
-
-            <TouchableHighlight
-                style={[styles.button, styles.buttonGoogle]}
-                underlayColor={'#fc473a'}
-                onPress={() => console.log('gogle')}>
-                <Text style={styles.btnText}>{`Sign In with Google`}</Text>
-            </TouchableHighlight>
         </ScrollView >
     );
 }
 
 Login.propTypes = {
     auth: PropTypes.object,
-    errors: PropTypes.object
+    // errors: PropTypes.object
 };
 
 

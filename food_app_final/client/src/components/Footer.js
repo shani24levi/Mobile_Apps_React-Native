@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
 
-const MusicRoute = () => <Text>Music</Text>;
-const AlbumsRoute = () => <Text>Albums</Text>;
+import { useNavigation } from '@react-navigation/native';
+
+
+const MusicRoute = () => <Text>Recents</Text>;
+
+const AlbumsRoute = () =>  <Text>Recents</Text>;
+
 const RecentsRoute = () => <Text>Recents</Text>;
 
 
 const Footer = (props) => {
+  const navigation = useNavigation();
+
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
       { key: 'music', title: 'Music', icon: 'bell' },

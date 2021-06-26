@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   inputContainerStyle: {
     backgroundColor: '#DCDCDC',
-    borderRadius: 20 ,
+    borderRadius: 20,
     // textDecoration: none
   },
   inputStyle: {

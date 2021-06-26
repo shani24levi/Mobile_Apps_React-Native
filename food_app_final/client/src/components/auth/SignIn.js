@@ -35,6 +35,9 @@ const SignIn = (props) => {
         if (props.errors.message === '"user" length must be at least 2 characters long') {
             errors["user"] = "*Too short";
         }
+        if(errors == {})
+            Alert.alert("Welcom", "pleas login with your new account")
+
         setErorrs(errors);
         return;
     }, [props.errors])
@@ -80,6 +83,7 @@ const SignIn = (props) => {
         }
         else {
             props.registerUser(newUser);
+
             // console.log(my_user);
             // if(my_user)
             //      navigation.navigate('FooDelicious')

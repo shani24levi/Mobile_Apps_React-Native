@@ -11,8 +11,8 @@ function AuthPage(props) {
         <View style={styles.body}>
             <View style={styles.container}>
                 <Image style={styles.image} source={require("../../../assets/logo.png")} />
-                <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center'}}>
-                    <TouchableHighlight    
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+                    <TouchableHighlight
                         style={islogin ? styles.buttonClicled : styles.button}
                         activeOpacity={0.6}
                         underlayColor="#DDDDDD"
@@ -64,11 +64,11 @@ const styles = StyleSheet.create({
         marginBottom: 50,
     },
     button: {
-        width:100,
+        width: 100,
         alignItems: "center",
     },
-    buttonClicled:{
-        width:100,
+    buttonClicled: {
+        width: 100,
         alignItems: "center",
         borderBottomColor: '#FA4A0C',
         borderBottomWidth: 5

@@ -51,7 +51,7 @@ const userLogin = async (req, res) => {
           if (!validPass) { res.status(401).json({ message: "Password does not match" }) }
           else {
             //console.log(user)
-            let token = createToken(user.id, user.email);
+            let token = createToken(user.id, user.email, user.user , user.avatar);
             console.log(token);
             res.json({ token })
           }

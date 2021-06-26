@@ -6,8 +6,6 @@ const multer =require('multer');
 var upload = multer({ dest: 'image/' })
 const { foodModel } = require("../models/foods");
 
-
-
 router.get('/',authToken, (req, res) => {
     control.getFoods(req, res); 
 });
@@ -56,4 +54,8 @@ router.get('/all/search', (req, res) => {
     })
 });
 
+
+router.delete('/:id',authToken, (req, res) => {
+    control.deleteFood(req, res); 
+});
 module.exports = router;

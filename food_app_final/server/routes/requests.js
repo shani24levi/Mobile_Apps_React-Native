@@ -12,7 +12,7 @@ router.get('/:id',authToken, (req, res) => {
     control.getRequestsById(req, res); 
 });
 
-router.get('/food/:id',authToken, async(req, res) => {
+router.get('/food/:id', async(req, res) => {
     control.getRequestsForIdFood(req, res); 
 });
 

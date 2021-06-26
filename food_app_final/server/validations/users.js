@@ -5,8 +5,8 @@ const { TOKEN } = constants;
 
 
 //Creates a token for user permissions
-const createToken = (_id, _email) => {
-  let newToken = jwt.sign({ email: _email, _id: _id }, `${TOKEN}`, { expiresIn: "3000mins" });
+const createToken = (_id, _email, user ,avatar) => {
+  let newToken = jwt.sign({ email: _email, _id: _id, user: user , avatar: avatar }, `${TOKEN}`, { expiresIn: "3000mins" });
   console.log(newToken)
   return newToken;
 }

@@ -5,7 +5,7 @@ const foodSchema = new mongoose.Schema({
     type: String, 
     title: String,
     description: String,
-    amount: Number, 
+    amount: String, 
     img: String,
     avilibal: { type: Boolean, default: true}, 
     date: { type: Date, default: Date.now} //in what time i ate the food

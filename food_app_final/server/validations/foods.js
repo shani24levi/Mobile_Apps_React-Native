@@ -8,7 +8,7 @@ const validFood = (_userObj) => {
     title: Joi.string().min(2).max(100).required(),
     description: Joi.string().min(1).max(100),
     avilibal:  Joi.boolean(),
-    amount: Joi.number(),
+    amount: Joi.string(),
     img:Joi.string().required(),
   })
   return schema.validate(_userObj);

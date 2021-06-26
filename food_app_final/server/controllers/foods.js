@@ -133,6 +133,20 @@ const searchFoods = (req, res) => {
     }
 }
 
+const deleteFood = (req, res) => {
+    try {
+        foodModel.deleteOne({ _id: req.params.id }, (err, data) => {
+            if (err) { res.status(400).json(err) }
+            res.json(data);
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message,
+        })
+    }
+}
 
 module.exports = {
     getFoods,
@@ -141,5 +155,6 @@ module.exports = {
     getAllAvilibalFoods,
     addFood,
     editFood,
-    searchFoods
+    searchFoods,
+    deleteFood
 };

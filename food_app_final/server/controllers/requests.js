@@ -4,17 +4,18 @@ const { requestModel } = require("../models/requests");
 //asoming receiver will never what to be the sender.
 const getRequests = async(req, res) => {
     try {
-        let receiver = await requestModel.findOne({ receiver: req._id }).populate('receiver sender food', 'avatar user email type')
-        if (!receiver) {
-            let sender = await requestModel.findOne({ sender: req._id }).populate('receiver sender food', 'avatar user email type')
+        let receiver = await requestModel.find({ receiver: req._id }).populate('receiver sender food', 'avatar user email type')
+        console.log(receiver.lenght);
+        if (!receiver.lenght) {
+            let sender = await requestModel.find({ sender: req._id }).populate('receiver sender food', 'avatar user email type')
             if (!sender) {
                 res.status(404).json("id not found");
             }
             else
-                res.json({ sender });
+                res.json(sender);
         }
         else
-            res.json({ receiver });
+            res.json(receiver);
     }
     catch (err) {
         res.status(500).json({

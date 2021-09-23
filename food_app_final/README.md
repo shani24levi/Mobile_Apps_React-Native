@@ -1,5 +1,5 @@
 #  food_app
-See a vidio :
+See a Video :
 https://user-images.githubusercontent.com/48565585/134548031-88e2a4ce-2acc-4c57-9ee3-ce5922eaa052.mp4
  
  ## by Shani Levi 2021 
